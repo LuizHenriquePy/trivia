@@ -1,11 +1,47 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Login extends Component {
   state = {
     name: '',
     email: '',
     btnDisabled: true,
+  };
+
+  componentDidMount() {
+    // oi
+  }
+
+  checkToken = async () => {
+    const token = localStorage.getItem('token');
+    const RESPONSE_ERROR_CODE = 3;
+    if (token) {
+      const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
+      const data = await this.fetchAPI(ENDPOINT);
+      const { response_code: responseCode } = data;
+      if (responseCode === RESPONSE_ERROR_CODE) {
+        const newToken = await this.getToken();
+        localStorage.setItem('token', newToken);
+        console.log('criou um novo token');
+      }
+    } else {
+      const newToken = await this.getToken();
+      localStorage.setItem('token', newToken);
+    }
+  };
+
+  fetchAPI = async (ENDPOINT) => {
+    const request = await fetch(ENDPOINT);
+    const response = await request.json();
+    return response;
+  };
+
+  getToken = async () => {
+    const ENDPOINT = 'https://opentdb.com/api_token.php?command=request';
+    const data = await this.fetchAPI(ENDPOINT);
+    const { token } = data;
+    return token;
   };
 
   validateButton = (name, email) => !(name.length > 0 && email.length > 0);
@@ -22,8 +58,10 @@ class Login extends Component {
     });
   };
 
-  handleClick = () => {
-    console.log('Deu certo');
+  handleClick = async () => {
+    const { history } = this.props;
+    await this.checkToken();
+    history.push('/game');
   };
 
   render() {
@@ -66,3 +104,9 @@ class Login extends Component {
 }
 
 export default connect()(Login);
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
