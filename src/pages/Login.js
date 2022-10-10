@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { login } from '../redux/reducers/player';
 
 class Login extends Component {
   state = {
@@ -111,10 +112,14 @@ class Login extends Component {
   }
 }
 
-export default connect()(Login);
+const mapDispatchToProps = (dispatch) => ({
+  userValue: (name, email) => dispatch(login({ name, email })),
+});
 
 Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
+
+export default connect(null, mapDispatchToProps)(Login);
