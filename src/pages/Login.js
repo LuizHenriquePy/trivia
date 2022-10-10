@@ -16,21 +16,30 @@ class Login extends Component {
 
   checkToken = async () => {
     const token = localStorage.getItem('token');
-    const RESPONSE_ERROR_CODE = 3;
-    if (token) {
-      const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
-      const data = await this.fetchAPI(ENDPOINT);
-      const { response_code: responseCode } = data;
-      if (responseCode === RESPONSE_ERROR_CODE) {
-        const newToken = await this.getToken();
-        localStorage.setItem('token', newToken);
-        console.log('criou um novo token');
-      }
-    } else {
+    if (!token) {
       const newToken = await this.getToken();
       localStorage.setItem('token', newToken);
     }
   };
+
+  // checkToken = async () => {
+  //   const token = localStorage.getItem('token');
+  //   const RESPONSE_ERROR_CODE = 3;
+  //   if (token) {
+  //     const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
+  //     const data = await this.fetchAPI(ENDPOINT);
+  //     const { response_code: responseCode } = data;
+  //     if (responseCode === RESPONSE_ERROR_CODE) {
+  //       // const newToken = await this.getToken();
+  //       // localStorage.setItem('token', newToken);
+  //       console.log('token inválido');
+  //       localStorage.removeItem('token');
+  //     }
+  //   } else{
+  //     const newToken = await this.getToken();
+  //     localStorage.setItem('token', newToken);
+  //   }
+  // };
 
   fetchAPI = async (ENDPOINT) => {
     const request = await fetch(ENDPOINT);
