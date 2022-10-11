@@ -8,7 +8,7 @@ describe('Verifica informações na tela de feedback: ', () =>{
       const title = screen.getByTestId("feedback-text");
       const scoreElement = screen.getByTestId("feedback-total-score");
       const assertionsElement = screen.getByTestId("feedback-total-question");
-      expect(title).toBeDefined();
+      expect(title).toBeDefined();  
       expect(scoreElement).toBeDefined();
       expect(assertionsElement).toBeDefined();
   })

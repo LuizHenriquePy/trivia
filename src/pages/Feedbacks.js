@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Header from '../components/Header';
 
 class Feedbacks extends Component {
   render() {
@@ -8,6 +9,7 @@ class Feedbacks extends Component {
     const magicNumb = 3;
     return (
       <div>
+        <Header />
         <h1>
           Feedbacks:
           {
