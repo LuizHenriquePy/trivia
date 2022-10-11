@@ -1,4 +1,4 @@
-import { CALCULATE_SCORE, SAVE_PLAYER } from '../actions/index';
+import { CALCULATE_SCORE, SAVE_ASSERTIONS, SAVE_PLAYER } from '../actions/index';
 
 const INITIAL_STATE = {
   name: '',
@@ -18,6 +18,11 @@ const player = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       score: action.payload + state.score,
+    };
+  case SAVE_ASSERTIONS:
+    return {
+      ...state,
+      assertions: state.assertions + 1,
     };
   default:
     return state;
