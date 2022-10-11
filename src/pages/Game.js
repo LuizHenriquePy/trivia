@@ -92,6 +92,7 @@ class Game extends Component {
         Next
       </button>
     );
+
     return (
       <div>
         <Header />
