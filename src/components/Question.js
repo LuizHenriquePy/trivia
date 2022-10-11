@@ -2,30 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Question extends Component {
-  // randomAnswers = (correct, incorrectQuestions, type) => {
-  //   let QUESTIONS_NUMBER = 0;
-  //   const MULTIPLE_QUESTIONS = 4;
-  //   if (type === 'multiple') {
-  //     QUESTIONS_NUMBER = MULTIPLE_QUESTIONS;
-  //   } else {
-  //     QUESTIONS_NUMBER = 2;
-  //   }
-  //   const randomIndex = Math.floor(Math.random() * QUESTIONS_NUMBER);
-  //   const questionsArray = [];
+  state = {
+    incorrectClass: '',
+    correctClass: '',
+  };
 
-  //   for (let i = 0; i < QUESTIONS_NUMBER - 1; i += 1) {
-  //     if (randomIndex === i) {
-  //       questionsArray.push(correct);
-  //       questionsArray.push(incorrectQuestions[i]);
-  //     } else {
-  //       questionsArray.push(incorrectQuestions[i]);
-  //     }
-  //   }
-
-  //   if (questionsArray.length < QUESTIONS_NUMBER) questionsArray.push(correct);
-
-  //   return questionsArray;
-  // };
+  checkAnswer = (answer) => {
+    const { quest: { correct_answer: correctAnswer } } = this.props;
+    console.log(answer === correctAnswer);
+    this.setState({
+      incorrectClass: 'incorrect',
+      correctClass: 'correct',
+    });
+  };
 
   randomAnswers = (correct, incorrectAnswers) => {
     const ONE_DOT_FIVE = 0.5;
@@ -41,6 +30,8 @@ export default class Question extends Component {
       incorrect_answers: incorrectAnswers,
       category,
     } } = this.props;
+    const { correctClass, incorrectClass } = this.state;
+    const { checkAnswer } = this;
     const answerList = this.randomAnswers(correctAnswer, incorrectAnswers);
     const MINUS_1 = -1;
     console.log(correctAnswer);
@@ -58,6 +49,8 @@ export default class Question extends Component {
                   key={ e }
                   type="button"
                   data-testid={ `wrong-answer-${i}` }
+                  onClick={ () => checkAnswer(e) }
+                  className={ incorrectClass }
                 >
                   {e}
                 </button>
@@ -68,6 +61,8 @@ export default class Question extends Component {
                 key={ e }
                 type="button"
                 data-testid="correct-answer"
+                onClick={ () => checkAnswer(e) }
+                className={ correctClass }
               >
                 {e}
               </button>
