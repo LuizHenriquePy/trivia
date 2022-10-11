@@ -7,9 +7,8 @@ class Game extends Component {
   state = {
     questions: [],
     currentQuestion: 0,
-    time: 30,
-    idTimer: '',
     answered: false,
+    enableQuestion: true,
   };
 
   async componentDidMount() {
@@ -34,14 +33,29 @@ class Game extends Component {
   };
 
   changeQuestion = () => {
-    const { currentQuestion } = this.state;
-    const LAST_QUESTION_INDEX = 4;
-    if (currentQuestion < LAST_QUESTION_INDEX) {
-      this.setState((prevState) => ({
-        currentQuestion: prevState.currentQuestion + 1,
-        time: 30,
-      }), () => this.timer());
-    }
+    this.setState({
+      enableQuestion: false,
+      answered: false,
+    }, () => {
+      const { currentQuestion } = this.state;
+      console.log(currentQuestion);
+      const LAST_QUESTION_INDEX = 4;
+      if (currentQuestion < LAST_QUESTION_INDEX) {
+        this.setState((prevState) => ({
+          currentQuestion: prevState.currentQuestion + 1,
+        }), () => {
+          this.setState({
+            enableQuestion: true,
+          });
+        });
+      } else {
+        this.setState({
+          enableQuestion: false,
+        });
+        const { history } = this.props;
+        history.push('/feedback');
+      }
+    });
   };
 
   checkToken = async () => {
@@ -63,30 +77,9 @@ class Game extends Component {
     // }
   };
 
-  timerCounter = () => {
-    this.setState((prevState) => ({
-      time: prevState.time - 1,
-    }));
-  };
-
-  stopTimer = (id) => {
-    const { time } = this.state;
-    if (time === 0) {
-      clearInterval(id);
-      this.setState({ answered: true });
-    }
-  };
-
-  timer = () => {
-    const ONE_SECOND = 1000;
-    const idTimer = setInterval(this.timerCounter, ONE_SECOND);
-    this.setState({ idTimer });
-    // console.log(time);
-  };
-
   render() {
-    const { questions, currentQuestion, time, idTimer, answered } = this.state;
-    const { changeQuestion, checkAnswer, stopTimer, timer } = this;
+    const { questions, currentQuestion, answered, enableQuestion } = this.state;
+    const { changeQuestion, checkAnswer } = this;
     const btnNext = () => (
       <button type="button" onClick={ changeQuestion } data-testid="btn-next">
         Next
@@ -96,12 +89,8 @@ class Game extends Component {
     return (
       <div>
         <Header />
-        {questions.length > 0 && <Question
+        {enableQuestion && questions.length > 0 && <Question
           quest={ questions[currentQuestion] }
-          stopTimer={ stopTimer }
-          timer={ timer }
-          idTimer={ idTimer }
-          time={ time }
           checkedAnswer={ checkAnswer }
         />}
         {
