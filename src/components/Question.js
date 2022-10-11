@@ -5,10 +5,23 @@ export default class Question extends Component {
   state = {
     incorrectClass: '',
     correctClass: '',
+    // time: 3,
+    // idTimer: '',
   };
 
+  componentDidMount() {
+    const { timer } = this.props;
+    timer();
+  }
+
+  componentDidUpdate() {
+    const { idTimer, stopTimer } = this.props;
+    stopTimer(idTimer);
+  }
+
   checkAnswer = (answer) => {
-    const { quest: { correct_answer: correctAnswer } } = this.props;
+    const { quest: { correct_answer: correctAnswer }, checkedAnswer } = this.props;
+    checkedAnswer();
     console.log(answer === correctAnswer);
     this.setState({
       incorrectClass: 'incorrect',
@@ -29,7 +42,7 @@ export default class Question extends Component {
       correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers,
       category,
-    } } = this.props;
+    }, time } = this.props;
     const { correctClass, incorrectClass } = this.state;
     const { checkAnswer } = this;
     const answerList = this.randomAnswers(correctAnswer, incorrectAnswers);
@@ -51,6 +64,7 @@ export default class Question extends Component {
                   data-testid={ `wrong-answer-${i}` }
                   onClick={ () => checkAnswer(e) }
                   className={ incorrectClass }
+                  disabled={ time === 0 }
                 >
                   {e}
                 </button>
@@ -63,11 +77,14 @@ export default class Question extends Component {
                 data-testid="correct-answer"
                 onClick={ () => checkAnswer(e) }
                 className={ correctClass }
+                disabled={ time === 0 }
               >
                 {e}
               </button>
             );
           })}
+          <div>{ time === 0 ? 0 : time }</div>
+
         </div>
       </div>
     );
@@ -82,4 +99,9 @@ Question.propTypes = {
     incorrect_answers: PropTypes.arrayOf(PropTypes.string).isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
+  timer: PropTypes.func.isRequired,
+  idTimer: PropTypes.number.isRequired,
+  stopTimer: PropTypes.func.isRequired,
+  time: PropTypes.number.isRequired,
+  checkedAnswer: PropTypes.func.isRequired,
 };
