@@ -2,41 +2,38 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { calculateScore } from '../redux/actions/index';
+import Timer from './Timer';
 
 class Question extends Component {
   state = {
     incorrectClass: '',
     correctClass: '',
-    // time: 3,
-    // idTimer: '',
-    // answerList: [],
-    lastScore: 0,
+    time: 30,
+    answerList: [],
   };
 
   componentDidMount() {
-    const {
-      timer,
-      // quest: {
-      //   correct_answer: correctAnswer, incorrect_answers: incorrectAnswers,
-      // },
-    } = this.props;
-    // this.setState({
-    //   answerList: this.randomAnswers(correctAnswer, incorrectAnswers),
-    // }, () =>
-    timer();
-    // );
+    const { quest: {
+      correct_answer: correctAnswer,
+      incorrect_answers: incorrectAnswers,
+    } } = this.props;
+    const answerList = this.randomAnswers(correctAnswer, incorrectAnswers);
+    this.setState({
+      answerList,
+    });
   }
 
-  componentDidUpdate() {
-    const { idTimer, stopTimer } = this.props;
-    stopTimer(idTimer);
-  }
+  changeTime = (timeSec) => {
+    this.setState({
+      time: timeSec,
+    });
+  };
 
   checkAnswer = (answer) => {
     const { quest:
       { correct_answer: correctAnswer, difficulty },
-    checkedAnswer, time, dispatch, idTimer, stopTimer } = this.props;
-    const { lastScore } = this.state;
+    checkedAnswer, dispatch } = this.props;
+    const { time } = this.state;
     checkedAnswer();
     console.log(answer === correctAnswer);
     const EASY = 1;
@@ -46,20 +43,15 @@ class Question extends Component {
     if (answer === correctAnswer) {
       switch (difficulty) {
       case 'easy':
-        dispatch(calculateScore(lastScore + TEN + (time * EASY)));
-        this.setState((prev) => ({ lastScore: prev.lastScore + TEN + (time * EASY) }));
+        dispatch(calculateScore(TEN + (time * EASY)));
         break;
       case 'medium':
-        dispatch(calculateScore(lastScore + TEN + (time * MEDIUM)));
-        this.setState((prev) => ({ lastScore: prev.lastScore + TEN + (time * MEDIUM) }));
+        dispatch(calculateScore(TEN + (time * MEDIUM)));
         break;
       default:
-        dispatch(calculateScore(lastScore + TEN + (time * HARD)));
-        this.setState((prev) => ({ lastScore: prev.lastScore + TEN + (time * HARD) }));
+        dispatch(calculateScore(TEN + (time * HARD)));
       }
     }
-    console.log(time);
-    stopTimer(idTimer);
     this.setState({
       incorrectClass: 'incorrect',
       correctClass: 'correct',
@@ -77,12 +69,10 @@ class Question extends Component {
     const { quest: {
       question,
       correct_answer: correctAnswer,
-      incorrect_answers: incorrectAnswers,
       category,
-    }, time, score } = this.props;
-    const { correctClass, incorrectClass } = this.state;
-    const { checkAnswer } = this;
-    const answerList = this.randomAnswers(correctAnswer, incorrectAnswers);
+    }, score, checkedAnswer } = this.props;
+    const { correctClass, incorrectClass, answerList, time } = this.state;
+    const { checkAnswer, changeTime } = this;
     const MINUS_1 = -1;
     console.log(correctAnswer);
     let i = MINUS_1;
@@ -99,9 +89,9 @@ class Question extends Component {
                   key={ e }
                   type="button"
                   data-testid={ `wrong-answer-${i}` }
+                  disabled={ time === 0 }
                   onClick={ () => checkAnswer(e) }
                   className={ incorrectClass }
-                  disabled={ time === 0 }
                 >
                   {e}
                 </button>
@@ -112,17 +102,16 @@ class Question extends Component {
                 key={ e }
                 type="button"
                 data-testid="correct-answer"
+                disabled={ time === 0 }
                 onClick={ () => checkAnswer(e) }
                 className={ correctClass }
-                disabled={ time === 0 }
               >
                 {e}
               </button>
             );
           })}
-          <div>{time === 0 ? 0 : time}</div>
           <p>{score}</p>
-
+          <Timer checkedAnswer={ checkedAnswer } changeTime={ changeTime } />
         </div>
       </div>
     );
@@ -138,10 +127,6 @@ Question.propTypes = {
     type: PropTypes.string.isRequired,
     difficulty: PropTypes.string.isRequired,
   }).isRequired,
-  timer: PropTypes.func.isRequired,
-  idTimer: PropTypes.number.isRequired,
-  stopTimer: PropTypes.func.isRequired,
-  time: PropTypes.number.isRequired,
   checkedAnswer: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   score: PropTypes.number.isRequired,
