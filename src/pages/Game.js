@@ -73,7 +73,7 @@ class Game extends Component {
     const { time } = this.state;
     if (time === 0) {
       clearInterval(id);
-    // this.setState({ time: 30 });
+      this.setState({ answered: true });
     }
   };
 
