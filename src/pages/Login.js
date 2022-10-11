@@ -72,7 +72,7 @@ class Login extends Component {
     const { name, email } = this.state;
     const { history, dispatch } = this.props;
     await this.checkToken();
-    dispatch(savePlayer({ name, gravatarEmail: email }));
+    dispatch(savePlayer({ name, gravatarEmail: email, score: 0 }));
     history.push('/game');
   };
 

@@ -16,3 +16,7 @@ export const calculateScore = (payload) => ({
   type: CALCULATE_SCORE,
   payload,
 });
+
+// export const resetScore = () => ({
+
+// })
