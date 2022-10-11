@@ -10,6 +10,7 @@ class Question extends Component {
     // time: 3,
     // idTimer: '',
     // answerList: [],
+    lastScore: 0,
   };
 
   componentDidMount() {
@@ -35,6 +36,7 @@ class Question extends Component {
     const { quest:
       { correct_answer: correctAnswer, difficulty },
     checkedAnswer, time, dispatch, idTimer, stopTimer } = this.props;
+    const { lastScore } = this.state;
     checkedAnswer();
     console.log(answer === correctAnswer);
     const EASY = 1;
@@ -44,13 +46,16 @@ class Question extends Component {
     if (answer === correctAnswer) {
       switch (difficulty) {
       case 'easy':
-        dispatch(calculateScore(TEN + (time * EASY)));
+        dispatch(calculateScore(lastScore + TEN + (time * EASY)));
+        this.setState((prev) => ({ lastScore: prev.lastScore + TEN + (time * EASY) }));
         break;
       case 'medium':
-        dispatch(calculateScore(TEN + (time * MEDIUM)));
+        dispatch(calculateScore(lastScore + TEN + (time * MEDIUM)));
+        this.setState((prev) => ({ lastScore: prev.lastScore + TEN + (time * MEDIUM) }));
         break;
       default:
-        dispatch(calculateScore(TEN + (time * HARD)));
+        dispatch(calculateScore(lastScore + TEN + (time * HARD)));
+        this.setState((prev) => ({ lastScore: prev.lastScore + TEN + (time * HARD) }));
       }
     }
     console.log(time);
