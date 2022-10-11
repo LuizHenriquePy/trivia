@@ -27,6 +27,16 @@ class Feedbacks extends Component {
         >
           Ranking
         </button>
+        <button
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ () => {
+            const { history } = this.props;
+            history.push('/');
+          } }
+        >
+          Play Again
+        </button>
       </div>
     );
   }
