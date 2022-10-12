@@ -73,8 +73,6 @@ describe('Faz os testes do game.', () => {
 
     renderWithRouterAndRedux(<App />, INITIAL_STATE, '/game');
 
-    // const correctAnswer = await screen.findByTestId('correct-answer');
-
     userEvent.click(await screen.findByTestId('correct-answer'));
     userEvent.click(screen.getByTestId('btn-next'));
 
