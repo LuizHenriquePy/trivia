@@ -35,7 +35,6 @@ class Question extends Component {
     checkedAnswer, dispatch } = this.props;
     const { time } = this.state;
     checkedAnswer();
-    console.log(answer === correctAnswer);
     const EASY = 1;
     const MEDIUM = 2;
     const HARD = 3;
@@ -75,7 +74,6 @@ class Question extends Component {
     const { correctClass, incorrectClass, answerList, time } = this.state;
     const { checkAnswer, changeTime } = this;
     const MINUS_1 = -1;
-    console.log(correctAnswer);
     let i = MINUS_1;
     return (
       <div>

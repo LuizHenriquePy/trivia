@@ -12,14 +12,11 @@ class Game extends Component {
   };
 
   async componentDidMount() {
-    console.log('Teste');
     const { history } = this.props;
     const isValid = await this.checkToken();
     if (!isValid) {
       history.push('/');
     }
-    // const { questions } = this.state;
-    // console.log(questions);
   }
 
   fetchAPI = async (ENDPOINT) => {
@@ -38,7 +35,6 @@ class Game extends Component {
       answered: false,
     }, () => {
       const { currentQuestion } = this.state;
-      console.log(currentQuestion);
       const LAST_QUESTION_INDEX = 4;
       if (currentQuestion < LAST_QUESTION_INDEX) {
         this.setState((prevState) => ({
@@ -64,12 +60,9 @@ class Game extends Component {
     // if (token) {
     const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
     const data = await this.fetchAPI(ENDPOINT);
-    console.log(data);
-    console.log('Aqui');
     this.setState({ questions: data.results });
     const { response_code: responseCode } = data;
     if (responseCode === RESPONSE_ERROR_CODE) {
-      console.log('token inválido');
       localStorage.removeItem('token');
       return false;
     }
