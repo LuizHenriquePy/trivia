@@ -8,11 +8,29 @@ class Header extends Component {
     const { name, email, score } = this.props;
     const emailHash = md5(email).toString();
     return (
-      <header>
-        <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${emailHash}` } alt="Foto usuário" />
-        <h4 data-testid="header-player-name">{ name }</h4>
-        <h4 data-testid="header-score">{ score }</h4>
-      </header>
+      <>
+        <header>
+          <div className="container row">
+            <div className="col-3">
+              <h4>Trivia</h4>
+            </div>
+            <div className="col-6 profile">
+              <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${emailHash}` } alt="Foto usuário" />
+              <h4 data-testid="header-player-name">
+                { name }
+              </h4>
+            </div>
+            <div className="col-3 text-end">
+              <h4 data-testid="header-score">
+                Pontos:
+                {' '}
+                { score }
+              </h4>
+            </div>
+          </div>
+        </header>
+        <hr />
+      </>
     );
   }
 }
