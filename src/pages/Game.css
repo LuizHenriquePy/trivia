@@ -1,0 +1,12 @@
+.buttonNext {
+  margin-top: 20px;
+  width: 300px;
+}
+
+.divButtonNext {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
