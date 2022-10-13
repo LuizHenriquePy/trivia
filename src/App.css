@@ -61,3 +61,42 @@ body {
     transform: translate3d(4px, 0, 0);
   }
 }
+
+.incorrect {
+  border: 3px solid red;
+}
+
+.correct {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+header > div {
+  align-items: center;
+}
+
+header .profile {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.profile > img {
+  border-radius: 8px;
+  height: 60px;
+  margin-right: 16px;
+  width: 60px;
+}
+
+.profile > h4 {
+  margin-bottom: 2px;
+}
+
+div > hr {
+  margin-top: 0;
+}
