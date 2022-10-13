@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { calculateScore, saveAssertions } from '../redux/actions/index';
 import Timer from './Timer';
+import './Question.css';
 
 class Question extends Component {
   state = {
-    incorrectClass: '',
-    correctClass: '',
+    incorrectClass: 'btn btn-outline-secondary',
+    correctClass: 'btn btn-outline-secondary',
     time: 30,
     answerList: [],
   };
@@ -53,8 +54,8 @@ class Question extends Component {
       }
     }
     this.setState({
-      incorrectClass: 'incorrect',
-      correctClass: 'correct',
+      incorrectClass: 'btn btn-danger incorrect',
+      correctClass: 'btn btn-success correct',
     });
   };
 
@@ -76,10 +77,15 @@ class Question extends Component {
     const MINUS_1 = -1;
     let i = MINUS_1;
     return (
-      <div>
-        <h1 data-testid="question-category">{category}</h1>
-        <h1 data-testid="question-text">{question}</h1>
-        <div data-testid="answer-options">
+      <div className="question">
+        <h1 data-testid="question-category" className="category">{category}</h1>
+        <h1
+          data-testid="question-text"
+          className="questionTitle"
+        >
+          {question}
+        </h1>
+        <div data-testid="answer-options" className="d-grid gap-2 container-md">
           {answerList.map((e) => {
             if (e !== correctAnswer) {
               i += 1;
@@ -109,8 +115,16 @@ class Question extends Component {
               </button>
             );
           })}
-          <p>{score}</p>
-          <Timer checkedAnswer={ checkedAnswer } changeTime={ changeTime } />
+          <div className="datas">
+            <span className="spanData">
+              Pontos:
+              {score}
+            </span>
+            <span className="spanData">
+              Segundos:
+              <Timer checkedAnswer={ checkedAnswer } changeTime={ changeTime } />
+            </span>
+          </div>
         </div>
       </div>
     );

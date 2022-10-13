@@ -1,0 +1,39 @@
+.incorrect {
+  border: 3px solid red;
+}
+
+.correct, .btn, .btn-outline-secondary {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.question {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.category {
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.questionTitle {
+  font-size: 25px;
+  font-weight: 300;
+  margin-bottom: 30px;
+  margin-top: 15px;
+  text-align: center;
+  width: 80%;
+}
+
+.spanData {
+  display: flex;
+  font-size: 20px;
+}
+
+.datas {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
