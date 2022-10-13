@@ -9,19 +9,83 @@ class Feedback extends Component {
   render() {
     const { score, assertions } = this.props;
     const magicNumb = 3;
-    const wellDone = () => (
+    const ONE = 1;
+    const TWO = 2;
+    const THREE = 3;
+    const FOUR = 4;
+    const stars = (assert) => {
+      switch (assert) {
+      case 0:
+        return (
+          <div>
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+          </div>
+        );
+      case ONE:
+        return (
+          <div>
+            <img src={ star } alt="star" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+          </div>
+        );
+      case TWO:
+        return (
+          <div>
+            <img src={ star } alt="star" width="40px" />
+            <img src={ star } alt="star" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+          </div>
+        );
+      case THREE:
+        return (
+          <div>
+            <img src={ star } alt="star" width="40px" />
+            <img src={ star } alt="star" width="40px" />
+            <img src={ star } alt="star" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+          </div>
+        );
+      case FOUR:
+        return (
+          <div>
+            <img src={ star } alt="star" width="40px" />
+            <img src={ star } alt="star" width="40px" />
+            <img src={ star } alt="star" width="40px" />
+            <img src={ star } alt="star" width="40px" />
+            <img src={ emptyStar } alt="emptyStar" width="40px" />
+          </div>
+        );
+      default:
+        return (
+          <div>
+            <img src={ star } alt="star" width="40px" />
+            <img src={ star } alt="star" width="40px" />
+            <img src={ star } alt="star" width="40px" />
+            <img src={ star } alt="star" width="40px" />
+            <img src={ star } alt="star" width="40px" />
+          </div>
+        );
+      }
+    };
+    const wellDone = (assert) => (
       <div>
-        <img src={ star } alt="star" width="40px" />
-        <img src={ star } alt="star" width="40px" />
-        <img src={ star } alt="star" width="40px" />
+        {stars(assert)}
         <p data-testid="feedback-text" className="mt-3">Well Done!</p>
       </div>
     );
-    const beBetter = () => (
+    const beBetter = (assert) => (
       <div>
-        <img src={ star } alt="star" width="40px" />
-        <img src={ emptyStar } alt="emptyStar" width="40px" />
-        <img src={ emptyStar } alt="emptyStar" width="40px" />
+        {stars(assert)}
         <p data-testid="feedback-text" className="mt-3">Could be better...</p>
       </div>
     );
@@ -32,8 +96,8 @@ class Feedback extends Component {
           <h1 className="mb-5">
             {
               assertions >= magicNumb
-                ? wellDone()
-                : beBetter()
+                ? wellDone(assertions)
+                : beBetter(assertions)
             }
           </h1>
           <div className="alert alert-info">
