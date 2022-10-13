@@ -74,7 +74,7 @@ class Login extends Component {
     const { name, email } = this.state;
     const { history, dispatch } = this.props;
     await this.checkToken();
-    dispatch(savePlayer({ name, gravatarEmail: email, score: 0 }));
+    dispatch(savePlayer({ name, gravatarEmail: email, score: 0, assertions: 0 }));
     history.push('/game');
   };
 
@@ -86,7 +86,7 @@ class Login extends Component {
   render() {
     const { name, email, btnDisabled } = this.state;
     return (
-      <div className="container pt-5 text-center">
+      <div className="login-container text-center">
         {/* <img src={ trivia } alt="logo" className="mb-4" width="300px" /> */}
         <img src={ logo1 } alt="logo" className="mb-4" width="300px" />
         <div className="col-md-12">

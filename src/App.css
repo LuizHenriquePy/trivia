@@ -100,3 +100,23 @@ header .profile {
 div > hr {
   margin-top: 0;
 }
+
+.trivia-logo {
+  height: 80px;
+}
+
+.shadow-custom {
+  box-shadow: 0 0.225rem 0.45rem rgba(0, 0, 0, 0.075);
+}
+
+
+.login-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.login-container button {
+  width: 207px;
+}

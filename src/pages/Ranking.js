@@ -65,7 +65,7 @@ class Ranking extends Component {
         <button
           type="button"
           data-testid="btn-go-home"
-          className="btn btn-outline-primary btn-lg my-4"
+          className="btn btn-primary btn-lg my-4"
           onClick={ () => {
             const { history } = this.props;
             history.push('/');
