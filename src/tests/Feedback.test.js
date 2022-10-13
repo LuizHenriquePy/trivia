@@ -47,6 +47,7 @@ describe('Verifica informações na tela de feedback: ', () => {
     const { pathname } = history.location;
     console.log(pathname);
     expect(pathname).toBe('/');
+    
   })
 
 })

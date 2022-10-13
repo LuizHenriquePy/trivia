@@ -2,6 +2,8 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { savePlayer } from '../redux/actions';
+import logo1 from '../images/logo1.png';
+// import trivia from '../images/trivia.png';
 
 class Login extends Component {
   state = {
@@ -84,40 +86,67 @@ class Login extends Component {
   render() {
     const { name, email, btnDisabled } = this.state;
     return (
-      <div>
-        <label htmlFor="input-player-name">
-          Nome
-          <input
-            type="text"
-            data-testid="input-player-name"
-            id="input-player-name"
-            name="name"
-            value={ name }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <label htmlFor="input-gravatar-email">
-          Email
-          <input
-            type="text"
-            data-testid="input-gravatar-email"
-            id="input-gravatar-email"
-            name="email"
-            value={ email }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="btn-play"
-          onClick={ this.handleClick }
-          disabled={ btnDisabled }
-        >
-          Play
-        </button>
-        <button type="button" data-testid="btn-settings" onClick={ this.getToSettings }>
-          Configurações
-        </button>
+      <div className="container pt-5 text-center">
+        {/* <img src={ trivia } alt="logo" className="mb-4" width="300px" /> */}
+        <img src={ logo1 } alt="logo" className="mb-4" width="300px" />
+        <div className="col-md-12">
+          <div className="form-group">
+            <label
+              htmlFor="input-player-name"
+              className="form-label"
+            >
+              {/* Nome */}
+              <input
+                className="form-control mt-2 mb-3"
+                type="text"
+                data-testid="input-player-name"
+                id="input-player-name"
+                name="name"
+                value={ name }
+                onChange={ this.handleChange }
+                placeholder="Player Name"
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <label htmlFor="input-gravatar-email" className="form-label">
+              {/* Email */}
+              <input
+                className="form-control mt-2 mb-4"
+                type="text"
+                data-testid="input-gravatar-email"
+                id="input-gravatar-email"
+                name="email"
+                placeholder="Gravatar email"
+                value={ email }
+                onChange={ this.handleChange }
+              />
+            </label>
+          </div>
+          <div className="col-lg-12 mb-3 m">
+            <button
+              className="btn btn-primary col-lg-3 "
+              type="button"
+              data-testid="btn-play"
+              onClick={ this.handleClick }
+              disabled={ btnDisabled }
+            >
+              Play
+            </button>
+          </div>
+          <div className="col-md-12">
+            <div className="form-group">
+              <button
+                className="btn btn-sm btn-light"
+                type="button"
+                data-testid="btn-settings"
+                onClick={ this.getToSettings }
+              >
+                Configurações
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
