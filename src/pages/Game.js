@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Question from '../components/Question';
+import './Game.css';
 
 class Game extends Component {
   state = {
@@ -74,9 +75,16 @@ class Game extends Component {
     const { questions, currentQuestion, answered, enableQuestion } = this.state;
     const { changeQuestion, checkAnswer } = this;
     const btnNext = () => (
-      <button type="button" onClick={ changeQuestion } data-testid="btn-next">
-        Next
-      </button>
+      <div className="divButtonNext">
+        <button
+          type="button"
+          onClick={ changeQuestion }
+          data-testid="btn-next"
+          className="btn btn-secondary buttonNext"
+        >
+          Next
+        </button>
+      </div>
     );
 
     return (

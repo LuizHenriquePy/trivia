@@ -29,26 +29,43 @@ class Ranking extends Component {
     const MINUS_1 = -1;
     let i = MINUS_1;
     return (
-      <div>
-        <h1 data-testid="ranking-title">Ranking</h1>
+      <div className="container-fluid text-center">
+        <h1 className="display-3 my-3" data-testid="ranking-title">Ranking</h1>
         <div>
-          {
-            rankingList.map((player) => {
-              i += 1;
-              return (
-                <div key={ i }>
-                  <img src={ `https://www.gravatar.com/avatar/${player.email}` } alt="Foto usuário" />
-                  <p data-testid={ `player-name-${i}` }>{ player.name }</p>
-                  <p data-testid={ `player-score-${i}` }>{ player.score }</p>
-                  <hr />
-                </div>
-              );
-            })
-          }
+          <ul className="list-group col-sm-12 col-md-8 col-lg-8 col-xl-4 mx-auto my-4">
+            {
+              rankingList.map((player) => {
+                i += 1;
+                return (
+                  <li key={ i } className="list-group-item text-center p-4 shadow">
+                    <img
+                      src={ `https://www.gravatar.com/avatar/${player.email}` }
+                      className="img-thumbnail rounded-circle shadow-sm"
+                      alt="..."
+                    />
+                    <h4
+                      data-testid={ `player-name-${i}` }
+                      className="fw-normal mt-2"
+                    >
+                      { player.name }
+                    </h4>
+                    <h4
+                      data-testid={ `player-score-${i}` }
+                      className="fw-light"
+                    >
+                      { player.score }
+                      &nbsp;pts
+                    </h4>
+                  </li>
+                );
+              })
+            }
+          </ul>
         </div>
         <button
           type="button"
           data-testid="btn-go-home"
+          className="btn btn-outline-primary btn-lg my-4"
           onClick={ () => {
             const { history } = this.props;
             history.push('/');
