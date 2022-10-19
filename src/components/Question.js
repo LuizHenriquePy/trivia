@@ -73,14 +73,15 @@ class Question extends Component {
       question,
       correct_answer: correctAnswer,
       category,
-    }, score, checkedAnswer } = this.props;
+    }, score, checkedAnswer, numberQuestion } = this.props;
     const { correctClass, incorrectClass, answerList, time } = this.state;
     const { checkAnswer, changeTime } = this;
     const MINUS_1 = -1;
     let i = MINUS_1;
     return (
       <div className="question">
-        <h1 data-testid="question-category" className="category">{category}</h1>
+        <h1 className="subtitle">{ `${numberQuestion + 1} de 5` }</h1>
+        <h1 data-testid="question-category" className="subtitle">{category}</h1>
         <h1
           data-testid="question-text"
           className="questionTitle"
@@ -145,6 +146,7 @@ Question.propTypes = {
   checkedAnswer: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   score: PropTypes.number.isRequired,
+  numberQuestion: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({

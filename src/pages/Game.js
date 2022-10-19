@@ -93,6 +93,7 @@ class Game extends Component {
         {enableQuestion && questions.length > 0 && <Question
           quest={ questions[currentQuestion] }
           checkedAnswer={ checkAnswer }
+          numberQuestion={ currentQuestion }
         />}
         {
           answered
