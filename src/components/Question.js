@@ -31,32 +31,34 @@ class Question extends Component {
   };
 
   checkAnswer = (answer) => {
-    const { quest:
-      { correct_answer: correctAnswer, difficulty },
-    checkedAnswer, dispatch } = this.props;
-    const { time } = this.state;
-    checkedAnswer();
-    const EASY = 1;
-    const MEDIUM = 2;
-    const HARD = 3;
-    const TEN = 10;
-    if (answer === correctAnswer) {
-      dispatch(saveAssertions());
-      switch (difficulty) {
-      case 'easy':
-        dispatch(calculateScore(TEN + (time * EASY)));
-        break;
-      case 'medium':
-        dispatch(calculateScore(TEN + (time * MEDIUM)));
-        break;
-      default:
-        dispatch(calculateScore(TEN + (time * HARD)));
+    if (!(document.querySelector('.correct'))) {
+      const { quest:
+        { correct_answer: correctAnswer, difficulty },
+      checkedAnswer, dispatch } = this.props;
+      const { time } = this.state;
+      checkedAnswer();
+      const EASY = 1;
+      const MEDIUM = 2;
+      const HARD = 3;
+      const TEN = 10;
+      if (answer === correctAnswer) {
+        dispatch(saveAssertions());
+        switch (difficulty) {
+        case 'easy':
+          dispatch(calculateScore(TEN + (time * EASY)));
+          break;
+        case 'medium':
+          dispatch(calculateScore(TEN + (time * MEDIUM)));
+          break;
+        default:
+          dispatch(calculateScore(TEN + (time * HARD)));
+        }
       }
+      this.setState({
+        incorrectClass: 'btn btn-danger incorrect',
+        correctClass: 'btn btn-success correct',
+      });
     }
-    this.setState({
-      incorrectClass: 'btn btn-danger incorrect',
-      correctClass: 'btn btn-success correct',
-    });
   };
 
   randomAnswers = (correct, incorrectAnswers) => {
@@ -143,7 +145,6 @@ Question.propTypes = {
   checkedAnswer: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
   score: PropTypes.number.isRequired,
-  // assertions: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
