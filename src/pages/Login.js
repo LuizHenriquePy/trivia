@@ -3,7 +3,30 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { savePlayer } from '../redux/actions';
 import logo1 from '../images/logo1.png';
-// import trivia from '../images/trivia.png';
+
+/*
+  async componentDidMount() {
+    const { history } = this.props;
+    const isValid = await this.checkToken();
+    if (!isValid) {
+      history.push('/');
+    }
+  }
+
+  checkToken = async () => {
+    const token = localStorage.getItem('token');
+    const RESPONSE_ERROR_CODE = 3;
+    const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
+    const data = await this.fetchAPI(ENDPOINT);
+    this.setState({ questions: data.results });
+    const { response_code: responseCode } = data;
+    if (responseCode === RESPONSE_ERROR_CODE) {
+      localStorage.removeItem('token');
+      return false;
+    }
+    return true;
+  };
+*/
 
 class Login extends Component {
   state = {
@@ -12,36 +35,24 @@ class Login extends Component {
     btnDisabled: true,
   };
 
-  componentDidMount() {
-    // oi
-  }
-
   checkToken = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
       const newToken = await this.getToken();
       localStorage.setItem('token', newToken);
+    } else {
+      const RESPONSE_ERROR_CODE = 3;
+      const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
+      const data = await this.fetchAPI(ENDPOINT);
+      // this.setState({ questions: data.results });
+      const { response_code: responseCode } = data;
+      if (responseCode === RESPONSE_ERROR_CODE) {
+        localStorage.removeItem('token');
+        const newToken = await this.getToken();
+        localStorage.setItem('token', newToken);
+      }
     }
   };
-
-  // checkToken = async () => {
-  //   const token = localStorage.getItem('token');
-  //   const RESPONSE_ERROR_CODE = 3;
-  //   if (token) {
-  //     const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
-  //     const data = await this.fetchAPI(ENDPOINT);
-  //     const { response_code: responseCode } = data;
-  //     if (responseCode === RESPONSE_ERROR_CODE) {
-  //       // const newToken = await this.getToken();
-  //       // localStorage.setItem('token', newToken);
-  //       console.log('token inválido');
-  //       localStorage.removeItem('token');
-  //     }
-  //   } else{
-  //     const newToken = await this.getToken();
-  //     localStorage.setItem('token', newToken);
-  //   }
-  // };
 
   fetchAPI = async (ENDPOINT) => {
     const request = await fetch(ENDPOINT);
@@ -87,7 +98,6 @@ class Login extends Component {
     const { name, email, btnDisabled } = this.state;
     return (
       <div className="login-container text-center">
-        {/* <img src={ trivia } alt="logo" className="mb-4" width="300px" /> */}
         <img src={ logo1 } alt="logo" className="mb-4" width="300px" />
         <div className="col-md-12">
           <div className="form-group">
@@ -95,7 +105,6 @@ class Login extends Component {
               htmlFor="input-player-name"
               className="form-label"
             >
-              {/* Nome */}
               <input
                 className="form-control mt-2 mb-3"
                 type="text"
@@ -110,7 +119,6 @@ class Login extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="input-gravatar-email" className="form-label">
-              {/* Email */}
               <input
                 className="form-control mt-2 mb-4"
                 type="text"
@@ -151,10 +159,6 @@ class Login extends Component {
     );
   }
 }
-
-// const mapDispatchToProps = (dispatch) => ({
-//   userValue: (name, email) => dispatch(login({ name, email })),
-// });
 
 Login.propTypes = {
   history: PropTypes.shape({
