@@ -13,27 +13,25 @@ export default class Timer extends Component {
 
   componentDidUpdate() {
     const { stopTimer } = this;
-    const { idTimer } = this.state;
-    stopTimer(idTimer);
+    const { idTimer, time } = this.state;
+    const { stopTimerNow } = this.props;
+    if (stopTimerNow || time === 0) {
+      stopTimer(idTimer);
+    }
   }
 
   timerCounter = () => {
-    const { changeTime } = this.props;
+    const { updateTime } = this.props;
     this.setState((prevState) => ({
       time: prevState.time - 1,
     }), () => {
       const { time } = this.state;
-      changeTime(time);
+      updateTime(time);
     });
   };
 
   stopTimer = (id) => {
-    const { time } = this.state;
-    const { checkedAnswer } = this.props;
-    if (time === 0) {
-      clearInterval(id);
-      checkedAnswer('INCORRECT');
-    }
+    clearInterval(id);
   };
 
   startTimer = () => {
@@ -51,6 +49,6 @@ export default class Timer extends Component {
 }
 
 Timer.propTypes = {
-  changeTime: PropTypes.func.isRequired,
-  checkedAnswer: PropTypes.func.isRequired,
+  updateTime: PropTypes.func.isRequired,
+  stopTimerNow: PropTypes.bool.isRequired,
 };

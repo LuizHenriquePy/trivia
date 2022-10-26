@@ -11,6 +11,7 @@ class Question extends Component {
     correctClass: 'btn btn-outline-secondary',
     time: 30,
     answerList: [],
+    stopTimerNow: false,
   };
 
   componentDidMount() {
@@ -24,13 +25,18 @@ class Question extends Component {
     });
   }
 
-  changeTime = (timeSec) => {
+  updateTime = (timeSec) => {
+    const { checkedAnswer } = this.props;
     this.setState({
       time: timeSec,
     });
+    if (timeSec === 0) {
+      checkedAnswer();
+    }
   };
 
   checkAnswer = (answer) => {
+    this.setState({ stopTimerNow: true });
     if (!(document.querySelector('.correct'))) {
       const { quest:
         { correct_answer: correctAnswer, difficulty },
@@ -74,8 +80,14 @@ class Question extends Component {
       correct_answer: correctAnswer,
       category,
     }, score, checkedAnswer, numberQuestion } = this.props;
-    const { correctClass, incorrectClass, answerList, time } = this.state;
-    const { checkAnswer, changeTime } = this;
+    const {
+      correctClass,
+      incorrectClass,
+      answerList,
+      time,
+      stopTimerNow,
+    } = this.state;
+    const { checkAnswer, updateTime } = this;
     const MINUS_1 = -1;
     let i = MINUS_1;
     return (
@@ -125,7 +137,11 @@ class Question extends Component {
             </span>
             <span className="spanData">
               Segundos:
-              <Timer checkedAnswer={ checkedAnswer } changeTime={ changeTime } />
+              <Timer
+                checkedAnswer={ checkedAnswer }
+                updateTime={ updateTime }
+                stopTimerNow={ stopTimerNow }
+              />
             </span>
           </div>
         </div>
