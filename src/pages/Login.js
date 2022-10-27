@@ -1,32 +1,8 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { savePlayer } from '../redux/actions';
+import { savePlayer, saveQuestions } from '../redux/actions';
 import logo1 from '../images/logo1.png';
-
-/*
-  async componentDidMount() {
-    const { history } = this.props;
-    const isValid = await this.checkToken();
-    if (!isValid) {
-      history.push('/');
-    }
-  }
-
-  checkToken = async () => {
-    const token = localStorage.getItem('token');
-    const RESPONSE_ERROR_CODE = 3;
-    const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
-    const data = await this.fetchAPI(ENDPOINT);
-    this.setState({ questions: data.results });
-    const { response_code: responseCode } = data;
-    if (responseCode === RESPONSE_ERROR_CODE) {
-      localStorage.removeItem('token');
-      return false;
-    }
-    return true;
-  };
-*/
 
 class Login extends Component {
   state = {
@@ -36,20 +12,28 @@ class Login extends Component {
   };
 
   checkToken = async () => {
+    const { dispatch } = this.props;
     const token = localStorage.getItem('token');
     if (!token) {
       const newToken = await this.getToken();
       localStorage.setItem('token', newToken);
+      const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${newToken}`;
+      const data = await this.fetchAPI(ENDPOINT);
+      dispatch(saveQuestions(data.results));
     } else {
       const RESPONSE_ERROR_CODE = 3;
       const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
       const data = await this.fetchAPI(ENDPOINT);
-      // this.setState({ questions: data.results });
       const { response_code: responseCode } = data;
       if (responseCode === RESPONSE_ERROR_CODE) {
         localStorage.removeItem('token');
         const newToken = await this.getToken();
         localStorage.setItem('token', newToken);
+        const endpoint = `https://opentdb.com/api.php?amount=5&token=${newToken}`;
+        const DATA = await this.fetchAPI(endpoint);
+        dispatch(saveQuestions(DATA.results));
+      } else {
+        dispatch(saveQuestions(data.results));
       }
     }
   };

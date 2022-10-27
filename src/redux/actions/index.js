@@ -1,6 +1,7 @@
 export const SAVE_PLAYER = 'SAVE_PLAYER';
 export const SAVE_ASSERTIONS = 'SAVE_ASSERTIONS';
 export const CALCULATE_SCORE = 'CALCULATE_SCORE';
+export const SAVE_QUESTIONS = 'SAVE_QUESTIONS';
 
 export const savePlayer = (payload) => ({
   type: SAVE_PLAYER,
@@ -17,6 +18,7 @@ export const calculateScore = (payload) => ({
   payload,
 });
 
-// export const resetScore = () => ({
-
-// })
+export const saveQuestions = (payload) => ({
+  type: SAVE_QUESTIONS,
+  payload,
+});

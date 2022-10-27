@@ -1,28 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Question from '../components/Question';
 import './Game.css';
 
 class Game extends Component {
   state = {
-    questions: [],
     currentQuestion: 0,
     answered: false,
     enableQuestion: true,
-  };
-
-  async componentDidMount() {
-    const token = localStorage.getItem('token');
-    const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
-    const data = await this.fetchAPI(ENDPOINT);
-    this.setState({ questions: data.results });
-  }
-
-  fetchAPI = async (ENDPOINT) => {
-    const request = await fetch(ENDPOINT);
-    const response = await request.json();
-    return response;
   };
 
   checkAnswer = () => {
@@ -55,7 +42,8 @@ class Game extends Component {
   };
 
   render() {
-    const { questions, currentQuestion, answered, enableQuestion } = this.state;
+    const { currentQuestion, answered, enableQuestion } = this.state;
+    const { questions } = this.props;
     const { changeQuestion, checkAnswer } = this;
     const btnNext = () => (
       <div className="divButtonNext">
@@ -87,10 +75,15 @@ class Game extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  questions: state.questions.questions,
+});
+
 Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  questions: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
-export default Game;
+export default connect(mapStateToProps, null)(Game);

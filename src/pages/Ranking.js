@@ -5,7 +5,7 @@ import md5 from 'crypto-js/md5';
 
 class Ranking extends Component {
   state = {
-    rankingList: [], // vem do localStorage
+    rankingList: [],
   };
 
   componentDidMount() {
@@ -17,7 +17,6 @@ class Ranking extends Component {
     };
     console.log(playerObj);
     const list = JSON.parse(localStorage.getItem('ranking') || '[]');
-    console.log(JSON.stringify(list));
     list.push(playerObj);
     list.sort((a, b) => b.score - a.score);
     localStorage.setItem('ranking', JSON.stringify(list));
