@@ -73,11 +73,6 @@ class Login extends Component {
     history.push('/game');
   };
 
-  getToSettings = () => {
-    const { history } = this.props;
-    history.push('/settings');
-  };
-
   render() {
     const { name, email, btnDisabled } = this.state;
     return (
@@ -125,18 +120,6 @@ class Login extends Component {
             >
               Play
             </button>
-          </div>
-          <div className="col-md-12">
-            <div className="form-group">
-              <button
-                className="btn btn-sm btn-light"
-                type="button"
-                data-testid="btn-settings"
-                onClick={ this.getToSettings }
-              >
-                Configurações
-              </button>
-            </div>
           </div>
         </div>
       </div>
