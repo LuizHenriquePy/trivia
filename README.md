@@ -1,6 +1,8 @@
 # Trivia
 O projeto Trivia é um jogo onde o usuário ganha pontos quanto mais questões ele acertar. As questões são consumidas de uma API REST e entregue ao usuário com a ajuda da biblioteca React.
+
 ![print-trivia](https://user-images.githubusercontent.com/66449676/205354615-32a79739-e3db-4618-b95b-b5dadab2499c.png)
+
 ## Tecnologias usadas
 - API REST
 - Bootstrap
