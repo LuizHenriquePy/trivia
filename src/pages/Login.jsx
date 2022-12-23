@@ -26,7 +26,7 @@ class Login extends Component {
 
   checkToken = async () => {
     const { dispatch } = this.props;
-    const endpoint = (token) => `https://opentdb.com/api.php?amount=5&token=${token}`;
+    const endpoint = (token) => `https://opentdb.com/api.php?amount=5&token=${token}&encode=base64`;
     const tokenLocalStorage = localStorage.getItem('token');
     if (tokenLocalStorage) {
       const RESPONSE_SUCESS_CODE = 0;
@@ -34,6 +34,7 @@ class Login extends Component {
       const { response_code: responseCode } = data;
       if (responseCode === RESPONSE_SUCESS_CODE) {
         dispatch(saveQuestions(data.results));
+        console.log(data.results);
         return;
       }
     }
@@ -42,6 +43,7 @@ class Login extends Component {
     localStorage.setItem('token', newToken);
     const data = await this.fetchAPI(endpoint(newToken));
     dispatch(saveQuestions(data.results));
+    console.log(data.results);
   };
 
   validateButton = (name, email) => !(name.length > 0 && email.length > 0);
