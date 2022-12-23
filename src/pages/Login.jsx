@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { savePlayer, saveQuestions } from '../redux/actions';
 import logo from '../images/logo.png';
 
+import base64ToUtf8 from '../utils/base64ToUft8';
+
 class Login extends Component {
   state = {
     name: '',
@@ -33,8 +35,7 @@ class Login extends Component {
       const data = await this.fetchAPI(endpoint(tokenLocalStorage));
       const { response_code: responseCode } = data;
       if (responseCode === RESPONSE_SUCESS_CODE) {
-        dispatch(saveQuestions(data.results));
-        console.log(data.results);
+        dispatch(saveQuestions(base64ToUtf8(data.results)));
         return;
       }
     }
@@ -42,8 +43,7 @@ class Login extends Component {
     const newToken = await this.getToken();
     localStorage.setItem('token', newToken);
     const data = await this.fetchAPI(endpoint(newToken));
-    dispatch(saveQuestions(data.results));
-    console.log(data.results);
+    dispatch(saveQuestions(base64ToUtf8(data.results)));
   };
 
   validateButton = (name, email) => !(name.length > 0 && email.length > 0);

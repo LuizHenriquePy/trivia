@@ -1,10 +1,10 @@
 const base64ToUtf8 = (data) => data.map((obj) => ({
-  category: encodeURIComponent(atob(obj.category)),
-  type: encodeURIComponent(atob(obj.type)),
-  difficulty: encodeURIComponent(atob(obj.difficulty)),
-  question: encodeURIComponent(atob(obj.question)),
-  correct_answer: encodeURIComponent(atob(obj.correct_answer)),
-  incorrect_answer: obj.incorrect_answer.map((str) => encodeURIComponent(atob(str))),
+  category: decodeURIComponent(atob(obj.category)),
+  type: decodeURIComponent(atob(obj.type)),
+  difficulty: decodeURIComponent(atob(obj.difficulty)),
+  question: decodeURIComponent(atob(obj.question)),
+  correct_answer: decodeURIComponent(atob(obj.correct_answer)),
+  incorrect_answers: obj.incorrect_answers.map((str) => decodeURIComponent(atob(str))),
 }));
 
 export default base64ToUtf8;
