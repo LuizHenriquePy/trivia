@@ -2,111 +2,58 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
-import star from '../images/star.png';
-import emptyStar from '../images/emptyStar.png';
+import yellowStar from '../images/star.png';
+import blackStar from '../images/emptyStar.png';
 
 class Feedback extends Component {
+  addStars = () => {
+    const { assertions } = this.props;
+    const numberOfStars = 5;
+    const starList = [];
+    for (let index = 0; index < numberOfStars; index += 1) {
+      if (index < assertions) {
+        starList.push(<img
+          src={ yellowStar }
+          alt="yellow star"
+          key={ index }
+          width="40px"
+        />);
+      } else {
+        starList.push(<img
+          src={ blackStar }
+          alt="black star"
+          key={ index }
+          width="40px"
+        />);
+      }
+    }
+    return starList;
+  };
+
   render() {
     const { score, assertions } = this.props;
-    const magicNumb = 3;
-    const ONE = 1;
-    const TWO = 2;
-    const THREE = 3;
-    const FOUR = 4;
-    const stars = (assert) => {
-      switch (assert) {
-      case 0:
-        return (
-          <div>
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-          </div>
-        );
-      case ONE:
-        return (
-          <div>
-            <img src={ star } alt="star" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-          </div>
-        );
-      case TWO:
-        return (
-          <div>
-            <img src={ star } alt="star" width="40px" />
-            <img src={ star } alt="star" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-          </div>
-        );
-      case THREE:
-        return (
-          <div>
-            <img src={ star } alt="star" width="40px" />
-            <img src={ star } alt="star" width="40px" />
-            <img src={ star } alt="star" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-          </div>
-        );
-      case FOUR:
-        return (
-          <div>
-            <img src={ star } alt="star" width="40px" />
-            <img src={ star } alt="star" width="40px" />
-            <img src={ star } alt="star" width="40px" />
-            <img src={ star } alt="star" width="40px" />
-            <img src={ emptyStar } alt="emptyStar" width="40px" />
-          </div>
-        );
-      default:
-        return (
-          <div>
-            <img src={ star } alt="star" width="40px" />
-            <img src={ star } alt="star" width="40px" />
-            <img src={ star } alt="star" width="40px" />
-            <img src={ star } alt="star" width="40px" />
-            <img src={ star } alt="star" width="40px" />
-          </div>
-        );
-      }
-    };
-    const wellDone = (assert) => (
-      <div>
-        {stars(assert)}
-        <p data-testid="feedback-text" className="mt-3">Well Done!</p>
-      </div>
-    );
-    const beBetter = (assert) => (
-      <div>
-        {stars(assert)}
-        <p data-testid="feedback-text" className="mt-3">Could be better...</p>
-      </div>
-    );
+    const numberOfCorrectAnswersToBeWellDone = 3;
     return (
       <div>
         <Header />
         <div className="container pt-5 text-center">
-          <h1 className="mb-5">
-            {
-              assertions >= magicNumb
-                ? wellDone(assertions)
-                : beBetter(assertions)
-            }
-          </h1>
+          <div className="mb-5">
+            <div>{ this.addStars() }</div>
+            <div>
+              {
+                assertions >= numberOfCorrectAnswersToBeWellDone
+                  ? <h1 className="mt-3">Well Done!</h1>
+                  : <h1 className="mt-3">Could be better...</h1>
+              }
+            </div>
+          </div>
           <div className="alert alert-info">
-            <h3 data-testid="feedback-total-score">
+            <h3>
               Score:
               {' '}
               { score }
             </h3>
-            <p data-testid="feedback-total-question">
+            <p>
               Assertions:
               {' '}
               { assertions }
@@ -115,7 +62,6 @@ class Feedback extends Component {
           <button
             className="btn btn-danger m-2"
             type="button"
-            data-testid="btn-ranking"
             onClick={ () => {
               const { history } = this.props;
               history.push('/ranking');
@@ -126,7 +72,6 @@ class Feedback extends Component {
           <button
             type="button"
             className="btn btn-success m-2"
-            data-testid="btn-play-again"
             onClick={ () => {
               const { history } = this.props;
               history.push('/');
