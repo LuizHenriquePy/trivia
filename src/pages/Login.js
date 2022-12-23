@@ -11,33 +11,6 @@ class Login extends Component {
     btnDisabled: true,
   };
 
-  checkToken = async () => {
-    const { dispatch } = this.props;
-    const token = localStorage.getItem('token');
-    if (!token) {
-      const newToken = await this.getToken();
-      localStorage.setItem('token', newToken);
-      const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${newToken}`;
-      const data = await this.fetchAPI(ENDPOINT);
-      dispatch(saveQuestions(data.results));
-    } else {
-      const RESPONSE_ERROR_CODE = 3;
-      const ENDPOINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
-      const data = await this.fetchAPI(ENDPOINT);
-      const { response_code: responseCode } = data;
-      if (responseCode === RESPONSE_ERROR_CODE) {
-        localStorage.removeItem('token');
-        const newToken = await this.getToken();
-        localStorage.setItem('token', newToken);
-        const endpoint = `https://opentdb.com/api.php?amount=5&token=${newToken}`;
-        const DATA = await this.fetchAPI(endpoint);
-        dispatch(saveQuestions(DATA.results));
-      } else {
-        dispatch(saveQuestions(data.results));
-      }
-    }
-  };
-
   fetchAPI = async (ENDPOINT) => {
     const request = await fetch(ENDPOINT);
     const response = await request.json();
@@ -49,6 +22,26 @@ class Login extends Component {
     const data = await this.fetchAPI(ENDPOINT);
     const { token } = data;
     return token;
+  };
+
+  checkToken = async () => {
+    const { dispatch } = this.props;
+    const endpoint = (token) => `https://opentdb.com/api.php?amount=5&token=${token}`;
+    const tokenLocalStorage = localStorage.getItem('token');
+    if (tokenLocalStorage) {
+      const RESPONSE_SUCESS_CODE = 0;
+      const data = await this.fetchAPI(endpoint(tokenLocalStorage));
+      const { response_code: responseCode } = data;
+      if (responseCode === RESPONSE_SUCESS_CODE) {
+        dispatch(saveQuestions(data.results));
+        return;
+      }
+    }
+    localStorage.removeItem('token');
+    const newToken = await this.getToken();
+    localStorage.setItem('token', newToken);
+    const data = await this.fetchAPI(endpoint(newToken));
+    dispatch(saveQuestions(data.results));
   };
 
   validateButton = (name, email) => !(name.length > 0 && email.length > 0);
