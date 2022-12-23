@@ -92,7 +92,7 @@ class Login extends Component {
                 name="name"
                 value={ name }
                 onChange={ this.handleChange }
-                placeholder="Player Name"
+                placeholder="Nickname"
               />
             </label>
           </div>
@@ -104,7 +104,7 @@ class Login extends Component {
                 data-testid="input-gravatar-email"
                 id="input-gravatar-email"
                 name="email"
-                placeholder="Gravatar email"
+                placeholder="Email"
                 value={ email }
                 onChange={ this.handleChange }
               />
