@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
-import logo1 from '../images/logo1.png';
+import logo from '../images/logo.png';
 
 class Header extends Component {
   render() {
@@ -12,7 +12,7 @@ class Header extends Component {
       <header className="shadow-custom mb-4">
         <div className="container row">
           <div className="d-none d-md-block col-md-3">
-            <img className="trivia-logo" alt="trivia-logo" src={ logo1 } />
+            <img className="trivia-logo" alt="trivia-logo" src={ logo } />
           </div>
           <div
             className="col-6

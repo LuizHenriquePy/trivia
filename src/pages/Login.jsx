@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { savePlayer, saveQuestions } from '../redux/actions';
-import logo1 from '../images/logo1.png';
+import logo from '../images/logo.png';
 
 class Login extends Component {
   state = {
@@ -70,7 +70,7 @@ class Login extends Component {
     const { name, email, btnDisabled } = this.state;
     return (
       <div className="login-container text-center">
-        <img src={ logo1 } alt="logo" className="mb-4" width="300px" />
+        <img src={ logo } alt="logo" className="mb-4" width="300px" />
         <div className="col-md-12">
           <div className="form-group">
             <label
