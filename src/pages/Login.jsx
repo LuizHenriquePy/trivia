@@ -1,8 +1,7 @@
-import { Component } from 'react';
+/* import { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { savePlayer, saveQuestions } from '../redux/actions';
-import logo from '../images/logo.png';
 
 import base64ToUtf8 from '../utils/base64ToUft8';
 
@@ -71,53 +70,7 @@ class Login extends Component {
   render() {
     const { name, email, btnDisabled } = this.state;
     return (
-      <div className="login-container text-center">
-        <img src={ logo } alt="logo" className="mb-4" width="300px" />
-        <div className="col-md-12">
-          <div className="form-group">
-            <label
-              htmlFor="input-player-name"
-              className="form-label"
-            >
-              <input
-                className="form-control mt-2 mb-3"
-                type="text"
-                data-testid="input-player-name"
-                id="input-player-name"
-                name="name"
-                value={ name }
-                onChange={ this.handleChange }
-                placeholder="Nickname"
-              />
-            </label>
-          </div>
-          <div className="form-group">
-            <label htmlFor="input-gravatar-email" className="form-label">
-              <input
-                className="form-control mt-2 mb-4"
-                type="text"
-                data-testid="input-gravatar-email"
-                id="input-gravatar-email"
-                name="email"
-                placeholder="Email"
-                value={ email }
-                onChange={ this.handleChange }
-              />
-            </label>
-          </div>
-          <div className="col-lg-12 mb-3 m">
-            <button
-              className="btn btn-primary col-lg-3 "
-              type="button"
-              data-testid="btn-play"
-              onClick={ this.handleClick }
-              disabled={ btnDisabled }
-            >
-              Play
-            </button>
-          </div>
-        </div>
-      </div>
+
     );
   }
 }
@@ -130,3 +83,4 @@ Login.propTypes = {
 };
 
 export default connect()(Login);
+ */

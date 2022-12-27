@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Question from '../components/Question';
-import './Game.css';
 
 class Game extends Component {
   state = {
