@@ -1,10 +1,8 @@
-import { CALCULATE_SCORE, SAVE_ASSERTIONS, SAVE_PLAYER } from '../actions/index';
+import { ADD_SCORE, SAVE_PLAYER } from '../actions/actionsPlayer';
 
 const INITIAL_STATE = {
-  name: '',
-  assertions: 0,
+  nickname: '',
   score: 0,
-  gravatarEmail: '',
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -12,26 +10,16 @@ const player = (state = INITIAL_STATE, action) => {
   case SAVE_PLAYER:
     return {
       ...state,
-      ...action.payload,
+      nickname: action.payload,
     };
-  case CALCULATE_SCORE:
+  case ADD_SCORE:
     return {
       ...state,
-      score: action.payload + state.score,
-    };
-  case SAVE_ASSERTIONS:
-    return {
-      ...state,
-      assertions: state.assertions + 1,
+      score: state.score + action.payload,
     };
   default:
     return state;
   }
 };
-
-export const login = (payload) => ({
-  type: 'ACTION',
-  payload: { ...payload, score: 0 },
-});
 
 export default player;

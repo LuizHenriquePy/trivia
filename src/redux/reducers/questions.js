@@ -1,4 +1,4 @@
-import { SAVE_QUESTIONS } from '../actions';
+import { SAVE_QUESTIONS } from '../actions/actionsQuestions';
 
 const INITIAL_STATE = {
   questions: [],
