@@ -122,7 +122,7 @@ div > hr {
 }
 
 .setting-btn {
-  width: 38px;
+  width: 120px;
   height: 38px;
 }
 
@@ -151,4 +151,39 @@ div > hr {
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
+}
+
+.radio-button {
+  border: 1px solid lightslategray;
+  background-color: white;
+  height: 40px;
+  width: 70px;
+}
+
+.radio-button-left {
+  border-radius: 10px 0 0 10px;
+}
+
+.radio-button-right {
+  border-radius: 0 10px 10px 0;
+}
+
+.isChecked-radio-button {
+  background-color: lightslategray;
+  color: white
+}
+
+.play-button {
+  border: 0;
+  height: 40px;
+  border-radius: 5px;
+  color: white;
+}
+
+.play-button-isDisabled {
+ background-color: #61A0FD;
+}
+
+.play-button-Enabled {
+  background-color: #0B5ED7;
 }
