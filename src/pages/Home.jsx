@@ -5,7 +5,7 @@ import podium from '../images/podium.png';
 class Home extends Component {
   state = {
     nickname: '',
-    hiddenAlert: true,
+    isHiddenAlert: true,
     selectedDifficulty: 'random',
     selectedCategory: 'Select Category',
     radioButtonsClasses: {
@@ -19,9 +19,9 @@ class Home extends Component {
   handleChange = ({ target }) => {
     const minimumNumberOfCharacters = 3;
     if (target.value.length >= minimumNumberOfCharacters) {
-      this.setState((prevState) => ({ ...prevState, hiddenAlert: true, nickname: target.value }));
+      this.setState((prevState) => ({ ...prevState, isHiddenAlert: true, nickname: target.value }));
     } else {
-      this.setState((prevState) => ({ ...prevState, hiddenAlert: true, nickname: target.value }));
+      this.setState((prevState) => ({ ...prevState, isHiddenAlert: true, nickname: target.value }));
     }
   };
 
@@ -32,7 +32,7 @@ class Home extends Component {
       console.log('PLAY');
       return;
     }
-    this.setState((prevState) => ({ ...prevState, hiddenAlert: false }));
+    this.setState((prevState) => ({ ...prevState, isHiddenAlert: false }));
   };
 
   handleClickRadioButton = ({ target }) => {
@@ -61,7 +61,7 @@ class Home extends Component {
   render() {
     const {
       nickname,
-      hiddenAlert,
+      isHiddenAlert,
       SelectedCategory, radioButtonsClasses: { random, easy, medium, hard } } = this.state;
     return (
       <main
@@ -76,7 +76,7 @@ class Home extends Component {
             onChange={ this.handleChange }
             placeholder="Nickname"
           />
-          <div hidden={ hiddenAlert }>
+          <div hidden={ isHiddenAlert }>
             <span className="text-danger">Please enter at least 3 characters</span>
           </div>
           <button
