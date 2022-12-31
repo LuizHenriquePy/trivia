@@ -109,14 +109,81 @@ div > hr {
   box-shadow: 0 0.225rem 0.45rem rgba(0, 0, 0, 0.075);
 }
 
-
+/* Page Home */
 .login-container {
+  height: 300px;
+  width: 300px;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin:auto;
 }
 
-.login-container button {
-  width: 207px;
+.setting-btn {
+  width: 120px;
+  height: 38px;
+}
+
+.setting-btn-img {
+  filter: invert(100%);
+}
+
+.ranking-btn-img {
+  filter: invert(100%);
+  transform:rotate(-90deg);
+}
+
+.width {
+  width: 250px;
+}
+
+/* Page Game */
+.buttonNext {
+  margin-top: 20px;
+  width: 300px;
+}
+
+.divButtonNext {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.radio-button {
+  border: 1px solid lightslategray;
+  background-color: white;
+  height: 40px;
+  width: 70px;
+}
+
+.radio-button-left {
+  border-radius: 10px 0 0 10px;
+}
+
+.radio-button-right {
+  border-radius: 0 10px 10px 0;
+}
+
+.isChecked-radio-button {
+  background-color: lightslategray;
+  color: white
+}
+
+.play-button {
+  border: 0;
+  height: 40px;
+  border-radius: 5px;
+  color: white;
+}
+
+.play-button-isDisabled {
+ background-color: #61A0FD;
+}
+
+.play-button-Enabled {
+  background-color: #0B5ED7;
 }
