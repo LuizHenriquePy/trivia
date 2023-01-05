@@ -3,6 +3,13 @@ import {
   CHANGE_DIFFICULTY,
   changeCategory,
   changeDifficulty,
+  REQUEST_CATEGORIES_FAILED,
+  REQUEST_CATEGORIES_SUCESSFUL,
+  REQUEST_CATEGORIES_STARTED,
+  requestCategoriesFailed,
+  requestCategoriesSucessful,
+  requestCategoriesStarted,
+  fetchCategories,
 } from './actionsGameSettings';
 import {
   SAVE_QUESTIONS,
@@ -24,6 +31,13 @@ export {
   CHANGE_DIFFICULTY,
   changeCategory,
   changeDifficulty,
+  REQUEST_CATEGORIES_FAILED,
+  REQUEST_CATEGORIES_SUCESSFUL,
+  REQUEST_CATEGORIES_STARTED,
+  requestCategoriesFailed,
+  requestCategoriesSucessful,
+  requestCategoriesStarted,
+  fetchCategories,
   SAVE_QUESTIONS,
   saveQuestions,
 };

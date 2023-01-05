@@ -1,8 +1,17 @@
-import { CHANGE_CATEGORY, CHANGE_DIFFICULTY } from '../actions/actionsGameSettings';
+import {
+  CHANGE_CATEGORY,
+  CHANGE_DIFFICULTY,
+  REQUEST_CATEGORIES_FAILED,
+  REQUEST_CATEGORIES_STARTED,
+  REQUEST_CATEGORIES_SUCESSFUL,
+} from '../actions/actionsGameSettings';
 
 const INITIAL_STATE = {
-  difficulty: 'random',
-  category: 'random',
+  selectedDifficulty: 'random',
+  selectedCategory: 'random',
+  isFecthingCategories: false,
+  isRequestCategoriesFailed: false,
+  categories: [],
 };
 
 const gameSettings = (state = INITIAL_STATE, action) => {
@@ -10,12 +19,31 @@ const gameSettings = (state = INITIAL_STATE, action) => {
   case CHANGE_CATEGORY:
     return {
       ...state,
-      category: action.payload,
+      selectedCategory: action.payload,
     };
   case CHANGE_DIFFICULTY:
     return {
       ...state,
-      difficulty: action.payload,
+      selectedDifficulty: action.payload,
+    };
+  case REQUEST_CATEGORIES_STARTED:
+    return {
+      ...state,
+      isFecthingCategories: true,
+      isRequestCategoriesFailed: false,
+    };
+  case REQUEST_CATEGORIES_SUCESSFUL:
+    return {
+      ...state,
+      isFecthingCategories: false,
+      isRequestCategoriesFailed: false,
+      categories: action.payload,
+    };
+  case REQUEST_CATEGORIES_FAILED:
+    return {
+      ...state,
+      isFecthingCategories: false,
+      isRequestCategoriesFailed: true,
     };
   default:
     return state;

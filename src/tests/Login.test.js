@@ -1,4 +1,3 @@
-import renderWithRouterAndRedux from "./helpers/renderWithRouterAndRedux";
 import App from '../App';
 import userEvent from "@testing-library/user-event";
 import { screen, waitForElementToBeRemoved } from "@testing-library/react";
