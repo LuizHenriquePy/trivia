@@ -34,7 +34,9 @@ const fetchCategories = () => async (dispatch) => {
     const result = await data.json();
     dispatch(requestCategoriesSucessful(result.trivia_categories));
   } catch (error) {
+    const timeout = 5000;
     dispatch(requestCategoriesFailed());
+    setTimeout(() => dispatch(fetchCategories()), timeout);
   }
 };
 

@@ -33,7 +33,6 @@ const gameSettings = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       isFecthingCategories: true,
-      isRequestCategoriesFailed: false,
     };
   case REQUEST_CATEGORIES_SUCESSFUL:
     return {
