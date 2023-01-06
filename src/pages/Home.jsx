@@ -97,6 +97,7 @@ class Home extends Component {
             value={ nickname }
             onChange={ this.handleChange }
             placeholder="Nickname"
+            disabled={ isRequestCategoriesFailed || isFecthingCategories }
           />
           <div hidden={ isHiddenAlert }>
             <span className="text-danger">Please enter at least 3 characters</span>
@@ -128,24 +129,28 @@ class Home extends Component {
                 onClick={ this.handleClickRadioButton }
                 className={ easy }
                 value="easy"
+                disabled={ isRequestCategoriesFailed || isFecthingCategories }
               />
               <input
                 type="button"
                 onClick={ this.handleClickRadioButton }
                 className={ medium }
                 value="medium"
+                disabled={ isRequestCategoriesFailed || isFecthingCategories }
               />
               <input
                 type="button"
                 onClick={ this.handleClickRadioButton }
                 className={ hard }
                 value="hard"
+                disabled={ isRequestCategoriesFailed || isFecthingCategories }
               />
               <input
                 type="button"
                 onClick={ this.handleClickRadioButton }
                 className={ random }
                 value="random"
+                disabled={ isRequestCategoriesFailed || isFecthingCategories }
               />
             </div>
             <select
@@ -153,6 +158,7 @@ class Home extends Component {
               value={ SelectedCategory }
               onChange={ this.handleSelect }
               defaultValue={ SelectedCategory }
+              disabled={ isRequestCategoriesFailed || isFecthingCategories }
             >
               {
                 categories && categories.map((category) => (
@@ -168,6 +174,7 @@ class Home extends Component {
           <button
             className="btn btn-warning p-0 setting-btn d-flex justify-content-center align-items-center"
             type="button"
+            disabled={ isRequestCategoriesFailed || isFecthingCategories }
           >
             <img src={ podium } alt="Podium" className="ranking-btn-img" width="27px" />
             <span
