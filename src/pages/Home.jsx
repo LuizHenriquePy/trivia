@@ -34,16 +34,13 @@ class Home extends Component {
   };
 
   handleClick = () => {
-    const { isFecthingCategories, isRequestCategoriesFailed } = this.props;
-    if (!(isFecthingCategories || isRequestCategoriesFailed)) {
-      const { nickname } = this.state;
-      const minimumNumberOfCharacters = 3;
-      if (nickname.length >= minimumNumberOfCharacters) {
-        console.log('PLAY');
-        return;
-      }
-      this.setState((prevState) => ({ ...prevState, isHiddenAlert: false }));
+    const { nickname } = this.state;
+    const minimumNumberOfCharacters = 3;
+    if (nickname.length >= minimumNumberOfCharacters) {
+      console.log('PLAY');
+      return;
     }
+    this.setState((prevState) => ({ ...prevState, isHiddenAlert: false }));
   };
 
   handleClickRadioButton = ({ target }) => {
@@ -108,6 +105,7 @@ class Home extends Component {
             className="play-button width mb-3 play-button-isDisabled"
             type="button"
             onClick={ this.handleClick }
+            disabled={ isRequestCategoriesFailed || isFecthingCategories }
           >
             {
               (isFecthingCategories || isRequestCategoriesFailed)
