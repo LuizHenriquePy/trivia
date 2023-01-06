@@ -8,13 +8,16 @@ import {
 
 const INITIAL_STATE = {
   selectedDifficulty: 'random',
-  selectedCategory: 'random',
+  selectedCategory: 'Random',
   isFecthingCategories: false,
   isRequestCategoriesFailed: false,
   categories: [],
 };
 
 const gameSettings = (state = INITIAL_STATE, action) => {
+  if (action.type === REQUEST_CATEGORIES_SUCESSFUL) {
+    action.payload.unshift({ id: 'Random', name: 'Random' });
+  }
   switch (action.type) {
   case CHANGE_CATEGORY:
     return {

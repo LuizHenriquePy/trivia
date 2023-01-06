@@ -31,7 +31,7 @@ const fetchCategories = () => async (dispatch) => {
   dispatch(requestCategoriesStarted());
   try {
     const data = await fetch('https://opentdb.com/api_category.php');
-    const result = data.json();
+    const result = await data.json();
     dispatch(requestCategoriesSucessful(result.trivia_categories));
   } catch (error) {
     dispatch(requestCategoriesFailed());

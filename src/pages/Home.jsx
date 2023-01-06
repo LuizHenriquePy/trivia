@@ -1,4 +1,7 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { fetchCategories } from '../redux/actions/actionsGameSettings';
 import logo from '../images/logo.png';
 import podium from '../images/podium.png';
 
@@ -7,7 +10,7 @@ class Home extends Component {
     nickname: '',
     isHiddenAlert: true,
     selectedDifficulty: 'random',
-    selectedCategory: 'Select Category',
+    selectedCategory: 'Random',
     radioButtonsClasses: {
       easy: 'radio-button radio-button-left text-capitalize',
       medium: 'radio-button text-capitalize',
@@ -15,6 +18,11 @@ class Home extends Component {
       random: 'radio-button radio-button-right text-capitalize isChecked-radio-button',
     },
   };
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchCategories());
+  }
 
   handleChange = ({ target }) => {
     const minimumNumberOfCharacters = 3;
@@ -26,13 +34,16 @@ class Home extends Component {
   };
 
   handleClick = () => {
-    const { nickname } = this.state;
-    const minimumNumberOfCharacters = 3;
-    if (nickname.length >= minimumNumberOfCharacters) {
-      console.log('PLAY');
-      return;
+    const { isFecthingCategories, isRequestCategoriesFailed } = this.props;
+    if (!(isFecthingCategories || isRequestCategoriesFailed)) {
+      const { nickname } = this.state;
+      const minimumNumberOfCharacters = 3;
+      if (nickname.length >= minimumNumberOfCharacters) {
+        console.log('PLAY');
+        return;
+      }
+      this.setState((prevState) => ({ ...prevState, isHiddenAlert: false }));
     }
-    this.setState((prevState) => ({ ...prevState, isHiddenAlert: false }));
   };
 
   handleClickRadioButton = ({ target }) => {
@@ -62,7 +73,14 @@ class Home extends Component {
     const {
       nickname,
       isHiddenAlert,
-      SelectedCategory, radioButtonsClasses: { random, easy, medium, hard } } = this.state;
+      SelectedCategory,
+      radioButtonsClasses: { random, easy, medium, hard },
+    } = this.state;
+    const {
+      isFecthingCategories,
+      isRequestCategoriesFailed,
+      categories,
+    } = this.props;
     return (
       <main
         className="login-container"
@@ -84,7 +102,19 @@ class Home extends Component {
             type="button"
             onClick={ this.handleClick }
           >
-            Play
+            {
+              (isFecthingCategories || isRequestCategoriesFailed)
+                ? (
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                )
+                : (
+                  <span>Play</span>
+                )
+            }
           </button>
           <div>
             <div className="mb-3">
@@ -117,11 +147,17 @@ class Home extends Component {
               className="form-select mb-3"
               value={ SelectedCategory }
               onChange={ this.handleSelect }
+              defaultValue={ SelectedCategory }
             >
-              <option>Select Category</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {
+                categories && categories.map((category) => (
+                  <option
+                    key={ category.id }
+                    value={ category.id }
+                  >
+                    {category.name}
+                  </option>))
+              }
             </select>
           </div>
           <button
@@ -141,4 +177,17 @@ class Home extends Component {
   }
 }
 
-export default Home;
+Home.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  isFecthingCategories: PropTypes.bool.isRequired,
+  isRequestCategoriesFailed: PropTypes.bool.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isFecthingCategories: state.gameSettings.isFecthingCategories,
+  isRequestCategoriesFailed: state.gameSettings.isRequestCategoriesFailed,
+  categories: state.gameSettings.categories,
+});
+
+export default connect(mapStateToProps)(Home);
