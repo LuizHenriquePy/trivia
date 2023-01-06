@@ -85,6 +85,13 @@ class Home extends Component {
       <main
         className="login-container"
       >
+        <div
+          className="alert alert-danger"
+          role="alert"
+          hidden={ !isRequestCategoriesFailed }
+        >
+          Error when trying to connect to the server
+        </div>
         <form className="d-flex flex-column justify-content-center align-items-center">
           <img src={ logo } alt="logo" width="300px" />
           <input
