@@ -117,7 +117,7 @@ class Home extends Component {
             }
           </button>
           <div>
-            <div className="mb-3">
+            <div className="mb-3 d-flex flex-row justify-content-center">
               <input
                 type="button"
                 onClick={ this.handleClickRadioButton }
