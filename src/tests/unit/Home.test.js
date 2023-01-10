@@ -73,6 +73,40 @@ describe('Page Home', () => {
     expect(buttonRanking).toBeInTheDocument();
     expect(buttonRanking).toBeEnabled();
   });
-  it('Todos elementos permanecem desabilitados e aparece um toast de erro quando há um erro na requisição da API', () => {});
+  it('All elements remain disabled and an error message appears when there is an error in the API request', async () => {
+    global.fetch = jest.fn().mockRejectedValue();
+    renderWithRouterAndRedux(<Home />);
+    const alertErrorMessage = await screen.findByRole('alert', { text: 'Error when trying to connect to the server' })
+    const imgLogo = screen.getByRole('img', {  name: /logo/i});
+    const inputNickname = screen.getByRole('textbox');
+    const disabledButtonPlay = screen.getByTestId('buttonPlay');
+    const buttonEasy = screen.getByRole('button', {  name: /easy/i});
+    const buttonMedium = screen.getByRole('button', {  name: /medium/i});
+    const buttonHard = screen.getByRole('button', {  name: /hard/i});
+    const buttonRandom = screen.getByRole('button', {  name: /random/i});
+    const selectCategories = screen.getByRole('combobox');
+    const buttonRanking = screen.getByRole('button', {  name: /podium ranking/i});
+    
+    expect(alertErrorMessage).toBeInTheDocument();
+    expect(imgLogo).toBeInTheDocument();
+    expect(inputNickname).toBeInTheDocument();
+    expect(imgLogo).toBeInTheDocument();
+    expect(inputNickname).toBeInTheDocument();
+    expect(inputNickname).toBeDisabled();
+    expect(disabledButtonPlay).toBeInTheDocument();
+    expect(disabledButtonPlay).toBeDisabled();
+    expect(buttonEasy).toBeInTheDocument();
+    expect(buttonEasy).toBeDisabled();
+    expect(buttonMedium).toBeInTheDocument();
+    expect(buttonMedium).toBeDisabled();
+    expect(buttonHard).toBeInTheDocument();
+    expect(buttonHard).toBeDisabled();
+    expect(buttonRandom).toBeInTheDocument();
+    expect(buttonRandom).toBeDisabled();
+    expect(selectCategories).toBeInTheDocument();
+    expect(selectCategories).toBeDisabled();
+    expect(buttonRanking).toBeInTheDocument();
+    expect(buttonRanking).toBeDisabled();
+  });
   it('Error message appears when the user presses the "Play" button with the input "nickname" having less than 3 characters and the message disappears after continue typing in the input', () => {});
 })
