@@ -106,6 +106,7 @@ class Home extends Component {
             type="button"
             onClick={ this.handleClick }
             disabled={ isRequestCategoriesFailed || isFecthingCategories }
+            data-testid="buttonPlay"
           >
             {
               (isFecthingCategories || isRequestCategoriesFailed)
