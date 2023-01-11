@@ -13,6 +13,24 @@ const mockCategories = {
   ],
 };
 
+const INITIAL_STATE = {
+  player: {
+    nickname: '',
+    numberOfCorrectAnswers: 0,
+    score: 0
+  },
+  questions: {
+    questions: []
+  },
+  gameSettings: {
+    selectedDifficulty: 'random',
+    selectedCategory: 'Random',
+    isFecthingCategories: false,
+    isRequestCategoriesFailed: false,
+    categories: []
+  }
+}
+
 describe('Page Home', () => {
   beforeEach(() => {
     global.fetch = jest.fn(async () => ({
@@ -22,7 +40,7 @@ describe('Page Home', () => {
   afterEach(() => jest.clearAllMocks());
   
   it('all elements start disabled waiting for the API response and after the response all elements are enabled', async () => {
-    renderWithRouterAndRedux(<Home />);
+    renderWithRouterAndRedux(<Home />, INITIAL_STATE);
     const imgLogo = screen.getByRole('img', {  name: /logo/i});
     const inputNickname = screen.getByRole('textbox');
     const disabledButtonPlay = screen.getByTestId('buttonPlay');
@@ -75,7 +93,7 @@ describe('Page Home', () => {
   });
   it('All elements remain disabled and an error message appears when there is an error in the API request', async () => {
     global.fetch = jest.fn().mockRejectedValue();
-    renderWithRouterAndRedux(<Home />);
+    renderWithRouterAndRedux(<Home />, INITIAL_STATE);
     const alertErrorMessage = await screen.findByRole('alert', { text: 'Error when trying to connect to the server' })
     const imgLogo = screen.getByRole('img', {  name: /logo/i});
     const inputNickname = screen.getByRole('textbox');
@@ -109,7 +127,7 @@ describe('Page Home', () => {
     expect(buttonRanking).toBeDisabled();
   });
   it('Error message appears when the user presses the "Play" button with the input "nickname" having less than 3 characters and the message disappears after continue typing in the input', async () => {
-    renderWithRouterAndRedux(<Home />);
+    renderWithRouterAndRedux(<Home />, INITIAL_STATE);
     const buttonPlay = await screen.findByRole('button', {  name: /play/i});
     const inputNickname = screen.getByRole('textbox');
     const errorMessage = screen.getByText(/please enter at least 3 characters/i)
