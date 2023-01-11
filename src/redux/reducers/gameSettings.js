@@ -15,9 +15,6 @@ const INITIAL_STATE = {
 };
 
 const gameSettings = (state = INITIAL_STATE, action) => {
-  if (action.type === REQUEST_CATEGORIES_SUCESSFUL) {
-    action.payload.unshift({ id: 'Random', name: 'Random' });
-  }
   switch (action.type) {
   case CHANGE_CATEGORY:
     return {
@@ -39,7 +36,7 @@ const gameSettings = (state = INITIAL_STATE, action) => {
       ...state,
       isFecthingCategories: false,
       isRequestCategoriesFailed: false,
-      categories: action.payload,
+      categories: [{ id: 'Random', name: 'Random' }, ...action.payload],
     };
   case REQUEST_CATEGORIES_FAILED:
     return {
