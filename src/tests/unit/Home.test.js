@@ -108,5 +108,26 @@ describe('Page Home', () => {
     expect(buttonRanking).toBeInTheDocument();
     expect(buttonRanking).toBeDisabled();
   });
+  it('Error message appears when the user presses the "Play" button with the input "nickname" having less than 3 characters and the message disappears after continue typing in the input', async () => {
+    renderWithRouterAndRedux(<Home />);
+    const buttonPlay = await screen.findByRole('button', {  name: /play/i});
+    const inputNickname = screen.getByRole('textbox');
+    const errorMessage = screen.getByText(/please enter at least 3 characters/i)
+
+    expect(errorMessage).not.toBeVisible();
+
+    userEvent.type(inputNickname, 'a')
+    userEvent.click(buttonPlay)
+
+    expect(errorMessage).toBeInTheDocument();
+
+    userEvent.type(inputNickname, 'aa')
+
+    expect(errorMessage).not.toBeVisible();
+
+    userEvent.click(buttonPlay)
+
+    expect(errorMessage).not.toBeVisible();
+  });
   it('Error message appears when the user presses the "Play" button with the input "nickname" having less than 3 characters and the message disappears after continue typing in the input', () => {});
 })
