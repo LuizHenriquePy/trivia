@@ -120,5 +120,4 @@ describe('Page Home', () => {
 
     expect(errorMessage).not.toBeVisible();
   });
-  it('Error message appears when the user presses the "Play" button with the input "nickname" having less than 3 characters and the message disappears after continue typing in the input', () => {});
 })
