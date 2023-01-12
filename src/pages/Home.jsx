@@ -122,7 +122,8 @@ class Home extends Component {
                 )
             }
           </button>
-          <div>
+          <div className="mt-4 mb-4 text-center">
+            <h4>Difficulty</h4>
             <div className="mb-3 d-flex flex-row justify-content-center">
               <input
                 type="button"
@@ -153,6 +154,7 @@ class Home extends Component {
                 disabled={ isRequestCategoriesFailed || isFecthingCategories }
               />
             </div>
+            <h4>Categories</h4>
             <select
               className="form-select mb-3"
               value={ SelectedCategory }
