@@ -25,9 +25,8 @@ class Home extends Component {
   }
 
   handleChange = ({ target }) => {
-    const maximumNumberOfCharacters = 10;
-    const { nickname } = this.state;
-    if (nickname.length < maximumNumberOfCharacters) {
+    const maximumNumberOfCharacters = 11;
+    if (target.value.length < maximumNumberOfCharacters) {
       this.setState((prevState) => ({ ...prevState, isHiddenAlert: true, nickname: target.value }));
     }
   };
