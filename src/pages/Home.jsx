@@ -68,6 +68,11 @@ class Home extends Component {
     this.setState((prevState) => ({ ...prevState, selectedCategory: target.value }));
   };
 
+  handleClickRanking = () => {
+    const { history } = this.props;
+    history.push('/ranking');
+  };
+
   render() {
     const {
       nickname,
@@ -180,6 +185,7 @@ class Home extends Component {
             className="btn btn-warning p-0 setting-btn d-flex justify-content-center align-items-center"
             type="button"
             disabled={ isRequestCategoriesFailed || isFecthingCategories }
+            onClick={ this.handleClickRanking }
           >
             <img src={ podium } alt="Podium" className="ranking-btn-img" width="27px" />
             <span
@@ -217,6 +223,7 @@ Home.propTypes = {
   isFecthingCategories: PropTypes.bool.isRequired,
   isRequestCategoriesFailed: PropTypes.bool.isRequired,
   categories: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  history: PropTypes.shape().isRequired,
 };
 
 const mapStateToProps = (state) => ({
