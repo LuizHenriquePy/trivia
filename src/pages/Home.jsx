@@ -22,8 +22,10 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchCategories());
+    const { dispatch, categories } = this.props;
+    if (categories.length === 0) {
+      dispatch(fetchCategories());
+    }
   }
 
   handleChange = ({ target }) => {
