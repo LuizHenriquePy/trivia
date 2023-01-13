@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { fetchCategories } from '../redux/actions/actionsGameSettings';
 import logo from '../images/logo.png';
 import podium from '../images/podium.png';
+import logoLinkedin from '../images/logoLinkedin.png';
+import logoGithub from '../images/logoGithub.png';
 
 class Home extends Component {
   state = {
@@ -185,6 +187,24 @@ class Home extends Component {
             </span>
           </button>
         </form>
+        <div className="d-flex justify-content-center mt-3">
+          <a
+            href="https://www.linkedin.com/in/luizhenriquepy/"
+            rel="noreferrer"
+            target="_blank"
+            className="mx-3"
+          >
+            <img width="30px" src={ logoLinkedin } alt="logo linkedin" />
+          </a>
+          <a
+            href="https://github.com/LuizHenriquePy"
+            rel="noreferrer"
+            target="_blank"
+            className="mx-3"
+          >
+            <img width="30px" src={ logoGithub } alt="logo github" />
+          </a>
+        </div>
       </main>
     );
   }
