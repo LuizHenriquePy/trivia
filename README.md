@@ -3,7 +3,7 @@ O projeto Trivia é um jogo onde o usuário ganha pontos quanto mais questões e
 
 ![print-trivia](https://user-images.githubusercontent.com/66449676/205354615-32a79739-e3db-4618-b95b-b5dadab2499c.png)
 
-## Tecnologias usadas
+## Tecnologias utilizadas
 - API REST
 - Bootstrap
 - React
