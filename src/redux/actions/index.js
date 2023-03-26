@@ -1,24 +1,47 @@
-export const SAVE_PLAYER = 'SAVE_PLAYER';
-export const SAVE_ASSERTIONS = 'SAVE_ASSERTIONS';
-export const CALCULATE_SCORE = 'CALCULATE_SCORE';
-export const SAVE_QUESTIONS = 'SAVE_QUESTIONS';
+import {
+  CHANGE_CATEGORY,
+  CHANGE_DIFFICULTY,
+  changeCategory,
+  changeDifficulty,
+  REQUEST_CATEGORIES_FAILED,
+  REQUEST_CATEGORIES_SUCESSFUL,
+  REQUEST_CATEGORIES_STARTED,
+  requestCategoriesFailed,
+  requestCategoriesSucessful,
+  requestCategoriesStarted,
+  fetchCategories,
+} from './actionsGameSettings';
+import {
+  SAVE_QUESTIONS,
+  saveQuestions,
+} from './actionsQuestions';
+import {
+  SAVE_PLAYER,
+  INCREMENT_NUMBER_OF_CORRECT_ANSWERS,
+  ADD_SCORE,
+  addScore,
+  incrementNumberOfCorrectAnswers,
+  savePlayer,
+} from './actionsPlayer';
 
-export const savePlayer = (payload) => ({
-  type: SAVE_PLAYER,
-  payload,
-});
-
-export const saveAssertions = (payload) => ({
-  type: SAVE_ASSERTIONS,
-  payload,
-});
-
-export const calculateScore = (payload) => ({
-  type: CALCULATE_SCORE,
-  payload,
-});
-
-export const saveQuestions = (payload) => ({
-  type: SAVE_QUESTIONS,
-  payload,
-});
+export {
+  SAVE_PLAYER,
+  INCREMENT_NUMBER_OF_CORRECT_ANSWERS,
+  ADD_SCORE,
+  addScore,
+  incrementNumberOfCorrectAnswers,
+  savePlayer,
+  CHANGE_CATEGORY,
+  CHANGE_DIFFICULTY,
+  changeCategory,
+  changeDifficulty,
+  REQUEST_CATEGORIES_FAILED,
+  REQUEST_CATEGORIES_SUCESSFUL,
+  REQUEST_CATEGORIES_STARTED,
+  requestCategoriesFailed,
+  requestCategoriesSucessful,
+  requestCategoriesStarted,
+  fetchCategories,
+  SAVE_QUESTIONS,
+  saveQuestions,
+};

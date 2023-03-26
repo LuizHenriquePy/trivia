@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { calculateScore, saveAssertions } from '../redux/actions/index';
+// import { calculateScore, saveAssertions } from '../redux/actions/index';
 import Timer from './Timer';
-import './Question.css';
 
 class Question extends Component {
   state = {

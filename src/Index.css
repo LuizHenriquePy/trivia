@@ -1,0 +1,230 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 15vmin;
+  pointer-events: none;
+}
+
+.red-border {
+  border: 1px solid red;
+}
+
+.green-border {
+  border: 1px solid green;
+}
+
+@media ( prefers-reduced-motion : no-preference ) {
+
+  .App-logo {
+    animation: shake infinite 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+}
+
+.App-header {
+  align-items: center;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes shake {
+
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.incorrect {
+  border: 3px solid red;
+}
+
+.correct {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+header > div {
+  align-items: center;
+}
+
+header .profile {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.profile > img {
+  border-radius: 8px;
+  height: 60px;
+  margin-right: 16px;
+  width: 60px;
+}
+
+.profile > h4 {
+  margin-bottom: 2px;
+}
+
+div > hr {
+  margin-top: 0;
+}
+
+.trivia-logo {
+  height: 80px;
+}
+
+.shadow-custom {
+  box-shadow: 0 0.225rem 0.45rem rgba(0, 0, 0, 0.075);
+}
+
+/* Page Home */
+.login-container {
+  height: 520px;
+  width: 300px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin:auto;
+}
+
+.setting-btn {
+  width: 120px;
+  height: 38px;
+}
+
+.setting-btn-img {
+  filter: invert(100%);
+}
+
+.ranking-btn-img {
+  filter: invert(100%);
+  transform:rotate(-90deg);
+}
+
+.width {
+  width: 250px;
+}
+
+/* Page Game */
+.buttonNext {
+  margin-top: 20px;
+  width: 300px;
+}
+
+.divButtonNext {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.radio-button {
+  border: 1px solid lightslategray;
+  background-color: white;
+  height: 40px;
+  width: 70px;
+}
+
+.radio-button-left {
+  border-radius: 10px 0 0 10px;
+}
+
+.radio-button-right {
+  border-radius: 0 10px 10px 0;
+}
+
+.isChecked-radio-button {
+  background-color: lightslategray;
+  color: white
+}
+
+.play-button {
+  border: 0;
+  height: 40px;
+  border-radius: 5px;
+  color: white;
+}
+
+.play-button-isDisabled {
+ background-color: #61A0FD;
+}
+
+.play-button-Enabled {
+  background-color: #0B5ED7;
+}
+
+/* Component Question */
+.incorrect {
+  border: 3px solid red;
+}
+
+.correct {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.question {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.subtitle {
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.questionTitle {
+  font-size: 25px;
+  font-weight: 300;
+  margin-bottom: 30px;
+  margin-top: 15px;
+  text-align: center;
+  width: 80%;
+}
+
+.spanData {
+  display: flex;
+  font-size: 20px;
+}
+
+.datas {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
